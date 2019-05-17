@@ -15,7 +15,10 @@ def get_24ora_page_titles(base_link):
     suceso_articles = []
     suceso_main = soup.find('div', {'class': 'td-ss-main-content'})
     for y in suceso_main:
-        suceso_links.append(y.find('a')['href'])
+        if type(y.find('a')) is int:
+            continue
+        else:
+            suceso_links.append(y.find('a')['href'])
     return suceso_links
 
 
@@ -40,7 +43,7 @@ def count_words(word_list):
  
 
 def main():
-    title_words = get_title_words(100, 150)
+    title_words = get_title_words(0, 100)
     for k, v in count_words(title_words):
         if v > 10:
             print('{} - {}'.format(k, v))
