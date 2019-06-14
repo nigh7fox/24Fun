@@ -1,2 +1,20 @@
 Matrix,2008,Personenauto,HYUNDAI,Benzine
 Matrix,HYUNDAI,2008,Benzine,Personenauto
+2008,Matrix,Benzine,HYUNDAI,"€ 3.876,-"
+2008,Matrix,HYUNDAI,Benzine,Personenauto
+Benzine,2008,Matrix,"€ 3.876,-",HYUNDAI
+HYUNDAI,Benzine,2008,Matrix,"€ 3.876,-"
+"€ 3.876,-",HYUNDAI,Matrix,Benzine,2008
+Benzine,HYUNDAI,"€ 3.876,-",2008,Matrix
+Benzine,2008,"€ 3.876,-",Matrix,HYUNDAI
+"€ 3.876,-",HYUNDAI,2008,Benzine,Matrix
+Matrix,HYUNDAI,2008,"€ 3.876,-",Benzine
+"€ 3.876,-",Matrix,HYUNDAI,Benzine,2008
+Benzine,Matrix,2008,"€ 3.876,-",HYUNDAI
+HYUNDAI,2008,"€ 3.876,-",Benzine,Matrix
+"€ 3.876,-",Matrix,Benzine,HYUNDAI,2008
+HYUNDAI,Matrix,Benzine,2008,"€ 3.876,-"
+HYUNDAI,Matrix,Benzine,2008,"€ 3.876,-"
+HYUNDAI,Matrix,Benzine,2008,"€ 3.876,-"
+HYUNDAI,Matrix,Benzine,2008,"€ 3.876,-",Mpv,76 kW (103 pk)
+HYUNDAI,Matrix,Benzine,2008,"€ 3.876,-",Mpv,76 kW (103 pk)

@@ -1,11 +1,12 @@
 from collections import Counter
 import urllib.request
 from bs4 import BeautifulSoup
+from ordered_set import OrderedSet
 import csv
 
 
 base_link = 'https://www.rdwdata.nl/kenteken/78GSP6'
-keywords = ['Merk', 'Handelsbenaming', 'Voertuigssoort', 'Brandstof', 'Bouwjaar'] 
+keywords = ['Merk', 'Handelsbenaming', 'Inrichting', 'Brandstof', 'Vermogen', 'Bouwjaar', 'BPM'] 
 
 
 def get_html():
@@ -16,9 +17,7 @@ def get_html():
 
 def get_info():
     soup = BeautifulSoup(get_html(),'html.parser')
-    kenteken_body = soup.find('div', {'class' : 'data small'})
     all_tds = soup.find_all('td')
-    keyword_list = []
     keyword_index = []
     kenteken_data = []
     for i, x in enumerate(all_tds):
@@ -26,10 +25,11 @@ def get_info():
             keyword_index.append(i)
     for y in keyword_index:
         kenteken_data.append(all_tds[y+2].string)
-    return list(set(kenteken_data))
+    return list(OrderedSet(kenteken_data))
 
 
 def write_to_csv():
+    print(get_info())
     try:
         with open('kenteken_data.csv', 'a') as f:
             writer = csv.writer(f)
