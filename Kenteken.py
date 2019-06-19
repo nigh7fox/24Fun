@@ -43,20 +43,21 @@ def main():
 
     fname = 'Kenteken_test.txt'
     
-    try:
-        with open(fname) as f:
-            for line in f:
-                a_link = base_link + line
-                print(a_link)
-                if a_link.strip() != base_link.strip():
+    with open(fname) as f:
+        for line in f:
+            a_link = base_link + line
+            print(a_link)
+            if a_link.strip() != base_link.strip():
+                try:
                     write_to_csv(a_link)
-                else:
-                    print("Looks empty")
-                    break
-    except urllib.error.HTTPError:
-        print("Bruuuuuhh")     
+                except urllib.error.HTTPError:
+                    print("bruuuuuuuhhhhhhh")
 
-
+            else:
+                print("Looks empty")
+                break
+    
+          
 
 if __name__ == "__main__":
     main()
