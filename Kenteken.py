@@ -1,5 +1,6 @@
 from collections import Counter
 import urllib.request
+import urllib.error
 import csv
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
@@ -40,17 +41,20 @@ def write_to_csv(a_link):
 def main():
     base_link = 'https://www.rdwdata.nl/kenteken/'  
 
-    fname = 'Kenteken.txt'
+    fname = 'Kenteken_test.txt'
     
-    with open(fname) as f:
-        for line in f:
-            a_link = base_link + line
-            print(a_link)
-            if a_link.strip() != base_link.strip():
-               write_to_csv(a_link)
-            else:
-                print("Looks empty")
-                break
+    try:
+        with open(fname) as f:
+            for line in f:
+                a_link = base_link + line
+                print(a_link)
+                if a_link.strip() != base_link.strip():
+                    write_to_csv(a_link)
+                else:
+                    print("Looks empty")
+                    break
+    except urllib.error.HTTPError:
+        print("Bruuuuuhh")     
 
 
 
