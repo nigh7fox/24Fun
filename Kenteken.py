@@ -41,7 +41,7 @@ def write_to_csv(a_link):
 def main():
     base_link = 'https://www.rdwdata.nl/kenteken/'  
 
-    fname = input('Enter filename')
+    fname = input('Enter filename for number plates')
     
     with open(fname) as f:
         for line in f:
