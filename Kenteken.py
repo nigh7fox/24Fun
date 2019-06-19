@@ -1,22 +1,20 @@
 from collections import Counter
 import urllib.request
+import csv
 from bs4 import BeautifulSoup
 from ordered_set import OrderedSet
-import csv
 
-
-base_link = 'https://www.rdwdata.nl/kenteken/78GSP6'
 keywords = ['Merk', 'Handelsbenaming', 'Inrichting', 'Brandstof', 'Vermogen', 'Bouwjaar', 'BPM'] 
 
 
-def get_html():
+def get_html(base_link):
     url_request = urllib.request.Request(base_link, headers = {'User-Agent': 'Mozilla/5.0'})
     url_html = urllib.request.urlopen(url_request).read()
     return url_html
 
 
-def get_info():
-    soup = BeautifulSoup(get_html(),'html.parser')
+def get_info(base_link):
+    soup = BeautifulSoup(get_html(base_link),'html.parser')
     all_tds = soup.find_all('td')
     keyword_index = []
     kenteken_data = []
@@ -28,15 +26,33 @@ def get_info():
     return list(OrderedSet(kenteken_data))
 
 
-def write_to_csv():
-    print(get_info())
+def write_to_csv(a_link):
     try:
-        with open('kenteken_data.csv', 'a') as f:
+        with open('kenteken_data_test.csv', 'a') as f:
             writer = csv.writer(f)
-            writer.writerow(get_info())
+            writer.writerow(get_info(a_link))
     except FileNotFoundError:
         print('ERRROOORRRRR REEEEE')
     finally:
         f.close()
 
-write_to_csv()
+
+def main():
+    base_link = 'https://www.rdwdata.nl/kenteken/'  
+
+    fname = 'Kenteken.txt'
+    
+    with open(fname) as f:
+        for line in f:
+            a_link = base_link + line
+            print(a_link)
+            if a_link.strip() != base_link.strip():
+               write_to_csv(a_link)
+            else:
+                print("Looks empty")
+                break
+
+
+
+if __name__ == "__main__":
+    main()
