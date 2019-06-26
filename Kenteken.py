@@ -19,14 +19,14 @@ def get_html(full_link):
     return url_html
 
 
-def get_info(full_link):
+def get_info(full_link,kenteken):
     """
     Returns value of keywords
     """
     soup = BeautifulSoup(get_html(full_link),'html.parser')
     all_tds = soup.find_all('td')
     keyword_index = []
-    kenteken_data = []
+    kenteken_data = [kenteken]
     
     #Finds the position of the keyword in the list of 'td'. 
     for i, x in enumerate(all_tds):            
@@ -39,11 +39,11 @@ def get_info(full_link):
     return list(OrderedSet(kenteken_data))
 
 
-def write_to_csv(full_link):
+def write_to_csv(full_link,kenteken):
     try:
-        with open('kenteken_data_test.csv', 'a') as f:
+        with open('kenteken_data_ruw.csv', 'a') as f:
             writer = csv.writer(f)
-            writer.writerow(get_info(full_link))
+            writer.writerow(get_info(full_link,kenteken))
     except FileNotFoundError:
         print("File not found")
     finally:
@@ -56,14 +56,13 @@ def main():
     file_name = input('Enter filename for number plates: ')
     
     with open(file_name) as f:
-        for line in f:
-            full_link = base_link + line
-            print(full_link)
+        for kenteken in f:
+            full_link = base_link + kenteken
             if full_link.strip() != base_link.strip():
                 try:
-                    write_to_csv(full_link)
+                    write_to_csv(full_link,kenteken.strip())
                 except urllib.error.HTTPError:
-                    print("Link not found")
+                    print("%s not found" % kenteken.strip())
 
             else:
                 print("Empty line")
